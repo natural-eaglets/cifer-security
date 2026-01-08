@@ -13,7 +13,7 @@ This repository contains the complete technical specification for CIFER Security
 
 | Document | Audience | Description |
 |----------|----------|-------------|
-| [Executive Summary](highleve.md) | All | High-level architecture overview |
+| [Executive Summary](high_level.md) | All | High-level architecture overview |
 | [Cryptographic Specification](docs/01_cryptographic_specification.md) | Cryptographers, Security VCs | Formal crypto primitives and proofs |
 | [TEE Architecture](docs/02_tee_architecture.md) | Infrastructure VCs, Security Researchers | Enclave design and attestation |
 | [Protocol Specification](docs/03_protocol_specification.md) | Protocol Engineers, Auditors | Formal protocol definitions |
@@ -44,7 +44,7 @@ This repository contains the complete technical specification for CIFER Security
 ```
 moretech/
 ├── README.md                              # This file
-├── highleve.md                            # Executive summary / high-level architecture
+├── high_level.md                          # Executive summary / high-level architecture
 └── docs/
     ├── 01_cryptographic_specification.md  # Formal cryptographic specification
     ├── 02_tee_architecture.md             # TEE platform and attestation

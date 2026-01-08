@@ -868,3 +868,4 @@ Reconstruction with shares {1, 3, 5}:
 - [ ] Key zeroization verified with memory inspection
 - [ ] Ciphertext format parsing handles malformed input safely
 
+
