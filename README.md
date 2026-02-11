@@ -1,85 +1,98 @@
-# CIFER Security — Technical Documentation Suite
+# CIFER Security
 
-> **Zero-Key Encryption Architecture**  
-> Post-Quantum • TEE-Based • Decentralized Key Custody
+**Zero-Key Encryption Infrastructure** for smart contracts, AI agents, and sensitive data workflows.
 
----
+Official website: [https://cifer-security.com](https://cifer-security.com)
 
-## Document Navigation
+## Product Links
 
-This repository contains the complete technical specification for CIFER Security's zero-key encryption platform. Documents are organized by technical domain and target audience.
+- Website: [https://cifer-security.com](https://cifer-security.com)
+- Why CIFER: [https://cifer-security.com/why-cifer](https://cifer-security.com/why-cifer)
+- Smart Contracts (On-Chain Confidential Storage): [https://cifer-security.com/solutions/smart-contract-privacy](https://cifer-security.com/solutions/smart-contract-privacy)
+- Encryption API: [https://cifer-security.com/solutions/api](https://cifer-security.com/solutions/api)
+- AI Agent Security Insight: [https://cifer-security.com/insights/why-ai-agents-need-confidential-computing](https://cifer-security.com/insights/why-ai-agents-need-confidential-computing)
+- Prompt Injection Defense (AI): [https://cifer-security.com/insights/prompt-injection-data-exfiltration-defense](https://cifer-security.com/insights/prompt-injection-data-exfiltration-defense)
+- Consumer App (Scan, Protect, Share): [https://app.cifer-security.com](https://app.cifer-security.com)
+- Playground: [https://playground.cifer-security.com](https://playground.cifer-security.com)
+- Insights: [https://cifer-security.com/insights](https://cifer-security.com/insights)
+- Contact: [https://cifer-security.com/contact](https://cifer-security.com/contact)
 
-### Quick Links
+## What CIFER Provides
 
-| Document | Audience | Description |
-|----------|----------|-------------|
-| [Executive Summary](high_level.md) | All | High-level architecture overview |
-| [Cryptographic Specification](docs/01_cryptographic_specification.md) | Cryptographers, Security VCs | Formal crypto primitives and proofs |
-| [TEE Architecture](docs/02_tee_architecture.md) | Infrastructure VCs, Security Researchers | Enclave design and attestation |
-| [Protocol Specification](docs/03_protocol_specification.md) | Protocol Engineers, Auditors | Formal protocol definitions |
-| [Security Analysis](docs/04_security_analysis.md) | Security VCs, CISOs | Threat model and security proofs |
-| [Distributed Systems](docs/05_distributed_systems.md) | Infrastructure VCs, SREs | CAP analysis and fault tolerance |
-| [API Specification](docs/06_api_specification.md) | Developers, Enterprise VCs | Integration and SDK reference |
+- Zero key management: keys are generated and used inside secure enclaves.
+- Confidential computing foundation: Intel SGX/TDX and AMD SEV compatible model.
+- Post-quantum primitives: ML-KEM-768 + modern symmetric encryption.
+- Distributed trust: threshold custody architecture to reduce single points of failure.
+- Developer-ready interfaces: API-first encryption and on-chain integration flows.
 
----
+## Core Use Cases
 
-## Reading Order by Investor Type
+### Smart Contracts
 
-### Security-Focused VCs
-1. Executive Summary → 2. Cryptographic Specification → 3. Security Analysis → 4. TEE Architecture
+Use CIFER to store encrypted state on public chains while keeping decryption rights controlled and auditable.
 
-### Infrastructure / Deep Tech VCs
-1. Executive Summary → 2. TEE Architecture → 3. Distributed Systems → 4. Protocol Specification
+- Private transactions and confidential state
+- Sealed bids and sensitive on-chain workflows
+- Threshold custody + on-chain authorization patterns
 
-### Enterprise Software VCs
-1. Executive Summary → 2. API Specification → 3. Security Analysis → 4. Distributed Systems
+### AI Agents
 
-### Crypto / Blockchain VCs
-1. Executive Summary → 2. Protocol Specification → 3. Cryptographic Specification → 4. Distributed Systems
+Use confidential computing patterns to secure agent memory, prompts, and sensitive outputs.
 
----
+- Protect agent conversation/context data
+- Limit exfiltration risk from prompt injection scenarios
+- Add hardware-enforced boundaries around sensitive AI workflows
 
-## Repository Structure
+### Consumer Share Flows
 
+Use the consumer app to scan, protect, and share files with encrypted handling.
+
+- File encryption and secure sharing
+- User-controlled access model
+- Zero-knowledge style handling posture
+
+## API Snapshot
+
+Base URL:
+
+```text
+https://cifer-blackbox.ternoa.dev:3010
 ```
-moretech/
-├── README.md                              # This file
-├── high_level.md                          # Executive summary / high-level architecture
-└── docs/
-    ├── 01_cryptographic_specification.md  # Formal cryptographic specification
-    ├── 02_tee_architecture.md             # TEE platform and attestation
-    ├── 03_protocol_specification.md       # Protocol state machines and messages
-    ├── 04_security_analysis.md            # Threat model and security proofs
-    ├── 05_distributed_systems.md          # Distributed architecture and CAP
-    ├── 06_api_specification.md            # REST/gRPC API and SDK design
-    ├── diagrams/                          # Source files for diagrams
-    └── references/                        # Academic paper citations
-```
 
----
+Main endpoints:
 
-## Standards Compliance
+- `GET /healthz`
+- `POST /encrypt-payload`
+- `POST /decrypt-payload`
 
-| Standard | Status | Document Reference |
-|----------|--------|-------------------|
-| NIST FIPS 203 (ML-KEM) | Compliant | [Cryptographic Specification](docs/01_cryptographic_specification.md) |
-| NIST SP 800-56C (KDF) | Compliant | [Cryptographic Specification](docs/01_cryptographic_specification.md) |
-| Intel SGX / AMD SEV | Supported | [TEE Architecture](docs/02_tee_architecture.md) |
-| SOC 2 Type II | Designed for | [API Specification](docs/06_api_specification.md) |
-| GDPR Article 32 | Addressed | [Security Analysis](docs/04_security_analysis.md) |
+Minimal payload encryption flow:
 
----
+1. Read block context from `GET /healthz`.
+2. Build signed `dataString` payload.
+3. Call `POST /encrypt-payload`.
+4. Store `cifer` + `encryptedMessage` for later decryption.
 
-## Version History
+## Smart Contract Snapshot (Live Environment)
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 0.1 | 2025-12-28 | Initial high-level architecture |
-| 0.2 | 2026-01-08 | Full technical documentation suite |
+Reference network highlighted on CIFER docs:
 
----
+- Ternoa zkEVM+ mainnet (Chain ID `752025`)
+- Secrets Controller: `0x4e31230737847C0895Df4F11876056960537E9Df`
+- On-Chain Storage/Vault: `0x6A8b01CA9AB653510F579cfB59502880DCD0F174`
+
+See full implementation guide:
+[https://cifer-security.com/solutions/smart-contract-privacy](https://cifer-security.com/solutions/smart-contract-privacy)
+
+## Repository Contents
+
+- `high_level.md`: high-level architecture and system context.
 
 ## Contact
 
-For technical due diligence inquiries, contact the CIFER Security engineering team.
+- Web: [https://cifer-security.com/contact](https://cifer-security.com/contact)
+- Email: `contactus@cifer-security.com`
+- X: [https://x.com/cifer_security](https://x.com/cifer_security)
 
+---
+
+CIFER Security positions encryption as infrastructure: usable by developers, secure by default, and aligned with post-quantum migration timelines.
